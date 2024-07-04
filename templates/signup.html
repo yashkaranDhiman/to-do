@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond&family=Inter:wght@200&family=Karla:ital@1&family=Lato&family=Montserrat&family=Roboto&family=Satisfy&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'EB Garamond', serif;
+            font-family: 'Inter', sans-serif;
+            font-family: 'Karla', sans-serif;
+            font-family: 'Lato', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            font-family: 'Roboto', sans-serif;
+        }
+        *::selection{
+            color: white;
+            background-color: black;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            background: rgb(0,109,129);
+            background: radial-gradient(circle, rgb(0, 225, 255) 0%, rgba(14,0,255,1) 53%, rgba(49,31,126,1) 100%); 
+        }
+        #main{
+            margin: 5vw 10vw;
+            border: 1px solid black ;
+            padding: 4vw 3vw;
+            border-radius: 20px;
+            background-color: white;
+        }
+        #main h1{
+            font-size: 3vw;
+            margin-bottom: 2.6vw;
+        }
+        .inp_field{
+            margin: 1vw 0;
+        }
+        input{
+            margin: 10px 0;
+            border-radius: 15px;
+            width: 50vw;
+            padding: 3px 6px;
+            height: 30px;
+        }
+        label{
+            font-size: x-large;
+        }
+        button{
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: larger;
+            border: 1px transparent;
+            background-color: black;
+            color: white;
+            margin-top: 2vw;
+        }
+        @media (max-width:1000px) {
+            #main h1{
+                font-size: 4vw;
+            }
+            label{
+                font-size: 2.5vw;
+            }
+        }
+        @media (max-width:700px) {
+            #main{
+                padding: 7vw 2vw 4vw 2vw;
+                margin: 10vw 6vw;
+            }
+            #main h1{
+                font-size: 5.5vw;
+                margin-bottom: 4vw;
+            }
+            button{
+                margin-left: 4vw;
+            }
+            label{
+                font-size: 3.2vw;
+            }
+            .inp_field{
+                padding-left: 4vw;
+            }
+        }
+        @media (max-width:500px) {
+            input{
+                height: 23px;
+                width: 87%;
+                border-radius: 10px;
+            } 
+            label{
+                font-size: 4vw;
+            }
+            #main{
+                padding: 10vw 3vw 4vw 3vw;
+            }
+            #main h1{
+                margin-bottom: 7vw;
+                font-size:8vw;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <form action="" method="POST">{% csrf_token %}
+        <h1>Sign in here</h1>
+        <div class="inp_field">
+        <label for="username">Enter username :</label><br>
+        <input type="text" name="username" id="username" placeholder="john007">
+        </div>
+        <div class="inp_field">
+        <label for="email">Enter you email :</label><br>
+        <input type="email" name="email" id="email" placeholder="Example@domain.com">
+        </div>
+        <div class="inp_field">
+        <label for="password1">Enter Password :</label><br>
+        <input type="password" name="password" id="password1" >
+        </div>
+        <div class="inp_field">
+        <label for="password2">Confirm Password :</label><br>
+        <input type="password" name="password2" id="password2" >
+        </div>
+            <button type="submit">Submit</button>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My to do list</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond&family=Inter:wght@200&family=Karla:ital@1&family=Lato&family=Montserrat&family=Noto+Sans&family=Roboto&family=Satisfy&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: black;
+        }
+
+        *::selection {
+            color: white;
+            background-color: black;
+        }
+
+        body {
+            background: rgb(0, 109, 129);
+            background: radial-gradient(circle, rgb(0, 225, 255) 0%, rgba(14, 0, 255, 1) 53%, rgba(49, 31, 126, 1) 100%);
+        }
+
+        nav h1 {
+            font-weight: 900;
+            cursor: pointer;
+            font-size: 60px;
+            color: transparent;
+            -webkit-text-stroke: 1px black;
+            letter-spacing: -3px;
+        }
+
+        nav h1:hover {
+
+            color: black;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 99;
+            border-bottom-right-radius: 30px;
+            align-items: center;
+            height: 90px;
+            background-color: rgb(255, 238, 0);
+            width: 100vw;
+            top: 0%;
+            position: fixed;
+        }
+
+        #main {
+            width: 80vw;
+            position: absolute;
+            border: 2px solid black;
+            margin: 13vw 10vw;
+            z-index: 10;
+        }
+
+        #main h1 {
+            padding: 10px 20px;
+        }
+
+        .flx {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr 0.2fr 0fr;
+            justify-content: space-evenly;
+            font-size: x-large;
+            padding: 5px 20px;
+        }
+
+        #navigators {
+            display: flex;
+            background-color: rgb(255, 215, 0);
+            justify-content: space-between;
+            padding: 10px 20px;
+            border: 1px solid black;
+        }
+
+        #sec1 {
+            display: flex;
+            color: white;
+            background-color: rgb(255, 215, 0);
+
+            border: 1px solid black;
+            justify-content: space-between;
+        }
+
+        .add {
+            padding: 5px 0px;
+            position: absolute;
+            top: 20%;
+            margin: 0VW 10vw;
+        }
+
+        .btn-danger {
+            margin: 0 20px;
+        }
+
+        #frm {
+            display: grid;
+            gap: 3vw;
+            grid-template-columns: 2fr 2fr 2fr;
+        }
+
+        #frm div input {
+            border: 2px solid black;
+        }
+
+        .btns {
+            cursor: pointer;
+        }
+
+        .chk {
+            display: none;
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+        }
+
+        .opaq {
+            opacity: 0.5;
+        }
+
+        #tasbar {
+            z-index: 2;
+        }
+
+        .add_btn {
+            color: black;
+            background-color: rgb(26, 26, 26);
+            color: white;
+
+            border-radius: 7px;
+            padding: 7px 20px;
+            border: 1px transparent;
+        }
+
+        .strk1 {
+            color: black;
+            font-weight: 600;
+            font-size: large;
+            width: 24vw;
+        }
+
+        .strk2 {
+            width: 30vw;
+            font-size: large;
+            color: black;
+            display: flex;
+        }
+
+        .signup {
+            border-radius: 7px;
+            background-color: rgb(26, 26, 26);
+            color: white;
+            border: 1px transparent;
+            padding: 12px 16px;
+        }
+
+        #clear {
+            border-radius: 7px;
+            color: white;
+            border: 1px transparent;
+            background-color: rgb(26, 26, 26);
+            padding: 8px 12px;
+            margin: 1vw;
+        }
+
+        .blk_btns {
+            color: white;
+            padding: 6px 10px;
+            margin-right: 15px;
+            font-size: large;
+            border-radius: 8px;
+            background-color: rgb(26, 26, 26);
+            border: 1px transparent;
+        }
+
+        @media (max-width:1450px) {
+            .add {
+                top: 13vw;
+            }
+
+            #main {
+                margin: 19vw 10vw;
+            }
+        }
+
+        @media (max-width:1000px) {
+            .add {
+                top: 19vw;
+            }
+
+            #main {
+                margin: 25vw 10vw;
+            }
+
+            nav h1 {
+                font-size: 5vw;
+            }
+
+            #navigators h2 {
+                font-size: 2.8vw;
+            }
+
+            #taskCount {
+                font-size: 3.3vw;
+            }
+        }
+
+        @media (max-width:600px) {
+            .strk1 {
+                font-size: medium;
+            }
+
+            .strk2 {
+                font-size: medium;
+            }
+        }
+
+        @media (max-width:700px) {
+            .add {
+                top: 25vw;
+            }
+
+            #main {
+                margin: 32vw 10vw;
+            }
+
+            nav h1 {
+                letter-spacing: -1px;
+                font-size: 5vw;
+            }
+
+            .signup {
+                padding: 10px 14px;
+            }
+
+            #clear {
+                padding: 6px 10px;
+                margin: 1.5vw;
+            }
+
+            .blk_btns {
+                padding: 6px 8px;
+                font-size: medium;
+            }
+        }
+
+        @media (max-width:500px) {
+            .signup {
+                padding: 8px 10px;
+            }
+
+            nav h1 {
+                font-size: 6vw;
+            }
+
+            nav h2 {
+                word-wrap: none;
+            }
+
+            nav {
+                padding: 0 10px 0 20px;
+            }
+
+            .add {
+                top: 30vw;
+            }
+
+            #main {
+                margin: 40vw 10vw;
+            }
+
+            .strk1 {
+                font-size: 2.8vw;
+            }
+
+            .strk2 {
+                font-size: 2.8vw;
+            }
+
+            #frm {
+                display: grid;
+                gap: 2vw;
+                grid-template-columns: 2fr 2fr 1fr;
+            }
+
+            #frm div input {
+                border: 1px solid black;
+            }
+
+        }
+
+        @media (max-width:450px) {
+            .signup {
+                padding: 6px 8px;
+            }
+
+            nav h2 {
+                font-size: 4vw;
+            }
+
+            nav {
+                padding: 0 16px;
+            }
+
+            #clear {
+                padding: 5px 6px;
+                font-size: 15px;
+            }
+
+            .blk_btns {
+                padding: 5px 6px;
+                font-size: 15px;
+            }
+
+            .btns {
+                width: 35px;
+                height: 35px;
+                margin: .9vw 1vw 0 0;
+            }
+
+            .flx {
+                padding: 0 5vw;
+                justify-content: space-between;
+                padding: 5px 5px 0 20px;
+            }
+
+            .strk2 {
+                width: 2vw;
+            }
+        }
+
+        @media (max-width:400px) {
+            .signup {
+                padding: 5px 7px;
+                font-size: small;
+            }
+
+            #frm div input {
+                padding: 2px 3px;
+            }
+
+            nav h1 {
+                font-size: 6vw;
+            }
+
+            nav h2 {
+                font-size: 4vw;
+            }
+
+            #main {
+                margin: 40vw 6vw;
+                width: 90vw;
+            }
+
+            .add {
+                margin: 0vw 5.9vw;
+            }
+
+            .add_btn {
+                padding: 5px 12px;
+                font-size: small;
+            }
+
+            #clear {
+                padding: 5px 6px;
+                font-size: small;
+            }
+
+            .blk_btns {
+                padding: 4px 5px;
+                font-size: small;
+            }
+
+            .strk1 {
+                margin-top: 1vw;
+            }
+
+            .strk2 {
+                margin-top: 1vw;
+            }
+
+            .btns {
+                width: 30px;
+                height: 30px;
+                margin: .9vw 1vw 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1>Welcome to My todo</h1>
+        {% if user.is_authenticated %}
+        <h2>Hello <i>{{request.user}}</i></h2>
+        {% else %}
+        <a href="{% url 'user-singup' %}"><button class="signup">Sign up</button></a>
+        {% endif %}
+    </nav>
+
+
+    <div id="main">
+        <div id="sec1">
+            <h1 id="taskCount">Tasks left: 0/0</h1>
+            {% if user.is_authenticated %}
+            <a href='{% url "clear-all" %}'><button id="clear">Delete All </button></a>
+            {% else %}
+            <a href='{% url "user-singup" %}'><button id="clear">Delete All </button></a>
+            {% endif %}
+        </div>
+        <div id="navigators">
+            <h2>Name</h2>
+            <h2>Description</h2>
+            <h2>Functionalities/status</h2>
+        </div>
+        <div id="tasbar">
+            {% for tsk in alltask %}
+            {% if request.user == tsk.user %}
+            <div class="flx">
+                <h5 class="strk1">{{tsk.name|title}}&nbsp;<small>({{tsk.created|timesince}} ago)</small></h5>
+                <p class="strk2">{{tsk.desc}}</p>
+
+                <a href="{% url 'delete-confirmation' tsk.id %}"><button class="blk_btns">Delete</button></a>
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="unchk btns" id="{{tsk.id}}" viewBox="0 0 24 24"
+                    width="40" height="40">
+                    <path
+                        d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM5 5V19H19V5H5Z">
+                    </path>
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="chk btns" id="{{tsk.id}}" viewBox="0 0 24 24" width="40"
+                    height="40">
+                    <path
+                        d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z">
+                    </path>
+                </svg>
+            </div><br>
+
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+            {% if user.is_authenticated %}
+            <div class="add">
+        <form id="frm" action="" onsubmit="submithandler()" method="POST">{% csrf_token %}
+            <div class="col-auto">
+                <input type="text" class="form-control" id="inputPassword2" name="task" placeholder="Task name">
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" id="inputPassword2" name="desc"
+                    placeholder="description for task">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="add_btn mb-3">Add</button>
+            </div>
+        </form>
+    </div>
+    {% else %}
+<div class="add">
+    <a href='{% url "user-singup" %}'> <button class="add_btn mb-3">Sign up now to add a task</button></a>
+</div>
+    {% endif %}
+
+
+    <hr>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        // Function to update the task completion status and classes in localStorage
+        function updateTaskStatus(taskId, status, classes) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+            tasks[taskId] = { status, classes };
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Function to retrieve the task completion status and classes from localStorage
+        function getTaskStatus(taskId) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+            return tasks[taskId] || { status: 'not-completed', classes: [] };
+        }
+
+        // Add an event listener to initialize checkboxes and classes on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const hideButtons = document.querySelectorAll(".unchk");
+            const showButtons = document.querySelectorAll(".chk");
+            const to_strike1 = document.querySelectorAll(".strk1");
+            const to_strike2 = document.querySelectorAll(".strk2");
+            const taskCount = document.getElementById("taskCount");
+            let incompleteTaskCount = 0;
+            const totalTaskCount = hideButtons.length; // Total number of tasks
+
+            hideButtons.forEach((hideButton, index) => {
+                const taskId = hideButton.getAttribute('id');
+                const { status, classes } = getTaskStatus(taskId);
+
+                if (status === 'completed') {
+                    hideButton.style.display = 'none';
+                    showButtons[index].style.display = 'block';
+                    to_strike1[index].classList.add("strikethrough", "opaq", ...classes);
+                    to_strike2[index].classList.add("strikethrough", "opaq", ...classes);
+                } else {
+                    incompleteTaskCount++; // Increment the count for incomplete tasks
+                }
+
+                hideButton.addEventListener('click', () => {
+                    hideButton.style.display = 'none';
+                    showButtons[index].style.display = 'block';
+                    to_strike1[index].classList.add("strikethrough", "opaq", ...classes);
+                    to_strike2[index].classList.add("strikethrough", "opaq", ...classes);
+                    updateTaskStatus(taskId, 'completed', classes);
+                    incompleteTaskCount--; // Decrement the count for incomplete tasks
+                    updateTaskCountDisplay();
+                });
+
+                showButtons[index].style.display = status === 'completed' ? 'block' : 'none';
+
+                showButtons[index].addEventListener('click', () => {
+                    showButtons[index].style.display = 'none';
+                    hideButton.style.display = 'block';
+                    to_strike1[index].classList.remove("strikethrough", "opaq", ...classes);
+                    to_strike2[index].classList.remove("strikethrough", "opaq", ...classes);
+                    updateTaskStatus(taskId, 'not-completed', classes);
+                    incompleteTaskCount++; // Increment the count for incomplete tasks
+                    updateTaskCountDisplay();
+                });
+            });
+
+            // Function to update the displayed task count
+            function updateTaskCountDisplay() {
+                if(incompleteTaskCount == 0){
+                    taskCount.textContent = "All Tasks are Done !!!"
+                }
+                else{
+                    taskCount.textContent = `Tasks left: ${incompleteTaskCount}/${totalTaskCount}`;
+                }
+            }
+
+            // Initial update of the task count
+            updateTaskCountDisplay();
+        });
+
+        function submithandler(e){
+            e.preventDefault();
+        }
+
+
+        
+
+    </script>
+</body>
+
+</html>
